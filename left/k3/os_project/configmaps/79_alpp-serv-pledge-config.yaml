@@ -1,0 +1,219 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: smpl-serv-pledge
+data:
+  JAVA_TOOL_OPTIONS: '-Dfile.encoding=UTF-8 -Duser.timezone=Europe/Moscow'
+  LOGGING_LEVEL_RU_example_MSA_CARLOAN_SERVICE_COMMON_OAUTH2_CLIENT: 'INFO'
+  SPRING_PROFILES_ACTIVE: 'openshift'
+  SERVER_PORT: '8080'
+  DB_URL: 'jdbc:postgresql://ifsmpl-pgc006ln.test.example.ru:5432/pledge_application'
+  # FLUENTD
+  FLUENTD_ENABLED: 'true'
+  FLUENTD_HOST: 'smpl-logs-collector'
+  FLUENTD_PORT: '24224'
+  APP_LOGGING_LEVEL: 'DEBUG'
+  # Audit
+  AUDIT_INFO_SYSTEM_CODE: 'smpl-serv-pledge'
+  AUDIT_REGISTRATION_TOPIC: 'initial-audit'
+  AUDIT_EVENTS_TOPIC: 'audit'
+  AUDIT_BOOTSTRAP_SERVERS: 'iftsau-kf5001ln.test.example.ru:9092,iftsau-kf5002ln.test.example.ru:9092'
+  AUDIT_SECURITY_PROTOCOL: 'SSL'
+  AUDIT_KAFKA_SSL_KEYSTORE_PATH: 'file:///mnt/audit-kafka-certs/keystore.jks'
+  AUDIT_KAFKA_SSL_KEYSTORE_TYPE: 'JKS'
+  AUDIT_KAFKA_SSL_TRUSTSTORE_PATH: 'file:///mnt/audit-kafka-certs/truststore.jks'
+  AUDIT_KAFKA_SSL_TRUSTSTORE_TYPE: 'JKS'
+  # EPA
+  EPA_AUTHORIZATION_GRANT_TYPE: 'client_credentials'
+  EPA_TOKEN_URL: 'https://k3-auth-mgt401lv.example24.ru/passport/oauth2/token'
+  EPA_TECH_TOKEN_URL: 'https://k3-auth-app401lv.example24.ru/passport/tech/oauth2/token'
+  OAUTH2_CLIENT_INSECURE: 'true'
+  OAUTH2_CLIENT_ENABLED: 'true'
+  OAUTH2_FORCE_EPA_TOKEN_EXPIRATION: 'true'
+  # Portfolio-aggregator
+  INTEGRATION_PORTFOLIO_AGGREGATOR_BACKEND_URL: 'https://portfolio-agregator.k3-portfolio.apps.kt-oscp.example24.ru'
+  INTEGRATION_PORTFOLIO_AGGREGATOR_CONNECTION_TIMEOUT: '10s'
+  INTEGRATION_PORTFOLIO_AGGREGATOR_READ_TIMEOUT: '20s'
+  # Car service docs
+  CAR_SERVICE_DOCS_BACKEND_URL: 'http://smpl-serv-docs:8080'
+  CAR_SERVICE_DOCS_CONNECTION_TIMEOUT: '10s'
+  CAR_SERVICE_DOCS_READ_TIMEOUT: '10s'
+  # Integration ABS
+  INTEGRATION_ABS_BACKEND_URL: 'http://smpl-comn-integration-abs:8080'
+  INTEGRATION_ABS_CONNECTION_TIMEOUT: '10s'
+  INTEGRATION_ABS_READ_TIMEOUT: '10s'
+  # Autoteka
+  INTEGRATION_AUTOTEKA_BACKEND_URL: 'http://smpl-comn-integration-autoteka:8080'
+  INTEGRATION_AUTOTEKA_CONNECTION_TIMEOUT: '10s'
+  INTEGRATION_AUTOTEKA_READ_TIMEOUT: '10s'
+  PLEDGE_AUTOTEKA_CALLBACK_URI: 'http://smpl-serv-pledge:8080/callback/report/autoteka'
+  # EPGU
+  EPGU_BACKEND_URL: 'https://exampleid-profile-service.k3-exampleid.apps.kt-oscp.example24.ru'
+  EPGU_CONNECTION_TIMEOUT: '10s'
+  EPGU_READ_TIMEOUT: '10s'
+  # File transfer
+  INTEGRATION_FILE_TRANSFER_SERVICE_BACKEND_URL: 'http://smpl-serv-file-transfer:8080'
+  # Integration settings
+  FL_CARD_SETTINGS_PHONE_TYPES: 'FOR_NOTIFICATION,MOBILE_PERSONAL'
+  FL_CARD_SETTINGS_EMAIL_TYPES: 'FOR_NOTIFICATION,PERSONAL'
+  FL_CARD_SETTINGS_PERMANENT_REGISTRATION_ADDRESS_TYPE: 'PERM_REG'
+  FL_CARD_SETTINGS_ACTUAL_ADDRESS_TYPE: 'ACTUAL'
+  # Credit number settings
+  CREDIT_NUMBER_PREFIX: 'Кредит,'
+  CREDIT_NUMBER_POSTFIX: '-З01'
+  # Processing attempts and timeouts
+  AUTOTEKA_REQUEST_LIMIT: '3'
+  DOCUMENT_SIGN_TIMEOUT: '30m'
+  DOCUMENT_SIGN_DECLINE_LIMIT: '5'
+  CHART_GENERATION_TIMEOUT: '50m'
+  PLEDGE_CONTRACT_RESERVATION_TIMEOUT: '50m'
+  AFTER_ERROR_ADDITIONAL_ATTEMPTS_LIMIT: '2'
+  AFTER_ERROR_ATTEMPT_DELAY: '2m'
+  AUTOTEKA_REPORT_LIFETIME: '1d'
+  # Notification-settings
+  CONTRACTS_PROCESS_JOB_TIME_WINDOW_BEGINNING: '10:00:00'
+  CONTRACTS_PROCESS_JOB_TIME_WINDOW_ENDING: '19:00:00'
+  META_LINK_SHORT_PROLONGATION: 'https://example.ru/i/clc'
+  APP_HTTP_READ_TIMEOUT: '10s'
+  APP_HTTP_CONNECTION_TIMEOUT: '10s'
+  DEFAULT_BIS_INSTANCE: '00000'
+  APPLICATION_INITIATOR_ID: '1388'
+  # Auto scoring settings
+  AUTOTEKA_SCORING_FOREIGN_VEHICLE_AGE: '13'
+  AUTOTEKA_SCORING_LOCAL_VEHICLE_AGE: '7'
+  AUTOTEKA_SCORING_LOCAL_VEHICLE_WMI: 'XTT,XTA,X96,X9L'
+  AUTOTEKA_SCORING_VEHICLE_TYPE: 'Легков'
+  AUTOTEKA_SCORING_CATEGORIES: 'b,в'
+  AUTOTEKA_SCORING_RED_TYPE: 'red'
+  AUTOTEKA_SCORING_YELLOW_TYPE: 'yellow'
+  AUTOTEKA_SCORING_MAX_RED_DAMAGE_COUNTER: '2'
+  AUTOTEKA_SCORING_MAX_YELLOW_DAMAGE_COUNTERS: '5,7,10'
+  AUTOTEKA_SCORING_PERCENT: '50'
+  # Pledge
+  PLEDGE_RATE_DISCOUNT: '1'
+  PLEDGE_CONTRACT_TYPE_DOC: 'ПаспортРФ'
+  PLEDGE_BZK_DISCOUNT_DEADLINE_PERIOD: '90d'
+  # Dsr
+  DOC_SIGN_SERVICE_TO: 'sa_prod_dsr@region.example.ru'
+  DOC_SIGN_PERMISSIONS: 'GRANT,DOWNLOAD'
+  # Unp-settings
+  UNP_SENDER: 'example'
+  UNP_MESSAGE_ID_PREFIX: 'smpl'
+  UNP_SOURCE_SYSTEM: '1388_smpl'
+  UNP_EVENT: 'smpl-pledge-push'
+  # UNP_CHANNEL: 'push' # не отправляем до появления поддержки push-уведомлений
+  UNP_BEGIN_TIME: '10:00:00'
+  UNP_END_TIME: '19:00:00'
+  UNP_SENDER_EMAIL: 'k3-msp-unp-email-svc@example.ru'
+  # FL Card rate limiter
+  RATE_LIMITER_FL_CARD_REQUESTS: '5'
+  RATE_LIMITER_FL_CARD_PERIOD: '1s'
+  RATE_LIMITER_FL_CARDTIMEOUT: '10s'
+  RATE_LIMITER_FL_CARD_BUFFER_SIZE: '50'
+  # FL Cross-ref rate limiter
+  RATE_LIMITER_FL_CROSS_REF_REQUESTS: '5'
+  RATE_LIMITER_FL_CROSS_REF_PERIOD: '1s'
+  RATE_LIMITER_FL_CROSS_REF_TIMEOUT: '10s'
+  RATE_LIMITER_FL_CROSS_REF_BUFFER_SIZE: '50'
+  # Portfolio rate limiter
+  RATE_LIMITER_PORTFOLIO_REQUESTS: '5'
+  RATE_LIMITER_PORTFOLIO_PERIOD: '1s'
+  RATE_LIMITER_PORTFOLIO_TIMEOUT: '10s'
+  RATE_LIMITER_PORTFOLIO_BUFFER_SIZE: '50'
+  # Unp-send rate limiter
+  RATE_LIMITER_UNP_SEND_REQUESTS: '100'
+  RATE_LIMITER_UNP_SEND_PERIOD: '1s'
+  RATE_LIMITER_UNP_SEND_TIMEOUT: '5s'
+  RATE_LIMITER_UNP_SEND_BUFFER_SIZE: '100'
+  # Fl-card
+  FL_CARD_BACKEND_URL: 'https://k3-auth-app401lv.example24.ru/api/rb/frsvsc/cspc/v1'
+  FL_CARD_CONNECTION_TIMEOUT: '10s'
+  FL_CARD_READ_TIMEOUT: '10s'
+  FL_CARD_SYSTEM_FROM: 'CustomerHub'
+  FL_CARD_SYSTEM_TO: 'CustomerHub'
+  FL_CARD_EXTERNAL_SYSTEM_ID: 'EXT_CH'
+  # Fl-cross-ref
+  FL_CROSS_REF_BACKEND_URL: 'https://k3-auth-app401lv.example24.ru/api/rb/frsvsc/cscr/v1'
+  FL_CROSS_REF_CONNECTION_TIMEOUT: '10s'
+  FL_CROSS_REF_READ_TIMEOUT: '15s'
+  FL_CROSS_REF_SYSTEM_FROM: 'CustomerHub'
+  FL_CROSS_REF_SYSTEM_TO: 'CustomerHub'
+  FL_CROSS_REF_MODE: 'active'
+  # Unp send-gateway
+  UNP_SEND_BACKEND_URL: 'https://ss1-genr01-unpc-k3-unp.apps.ss1-genr01.test.example.ru'
+  UNP_SEND_CONNECTION_TIMEOUT: '10s'
+  UNP_SEND_READ_TIMEOUT: '10s'
+  # Document-sign
+  DOCUMENT_SIGN_TEXT_SMS_BZK_DISCOUNT: 'Перейдите по ссылке для подписания документов регистрации залога'
+  DOCUMENT_SIGN_DOSSIER_TYPE_BZK_DISCOUNT: 'CreditFL'
+  DOCUMENT_SIGN_PRODUCT_ID_BZK_DISCOUNT: 'AN'
+  DOCUMENT_SIGN_DOC_TYPE_BZK_DISCOUNT: 'ДоговорЗалогаБЗК_Кредиты ФЛ'
+  DOCUMENT_SIGN_DOC_NAME_BZK_DISCOUNT: 'Дополнительное соглашение к кредитному договору'
+  DSR_ATTRS_PATH: 'file:./config/dsr_attrs.yml'
+  dsr_attrs.yml: |
+    app:
+      document-sign:
+        properties:
+          bzk-discount:
+            attrs:
+              - pfAttrName: rate
+                pfAttrCaption: Новая процентная ставка
+                pfAttrSequenceNum: 0
+              - pfAttrName: sum
+                pfAttrCaption: Предварительный новый ежемесячный платёж
+                pfAttrSequenceNum: 1
+              - pfAttrName: vin
+                pfAttrCaption: VIN предоставляемого в залог автомобиля
+                pfAttrSequenceNum: 2
+
+  ###############################################
+  # Legacy
+  ###############################################
+  # Print forms
+  INTEGRATION_PRINT_FORMS_PD_FORMAT: '0'
+  INTEGRATION_PRINT_FORMS_TEMPLATE_NAME: 'DS_KD_Auto'
+  INTEGRATION_PRINT_FORMS_ADDITIONAL_AGGREEMENT: '1'
+  INTEGRATION_PRINT_FORMS_AGENT_FIO: 'Жигарев Иван Александрович'
+  INTEGRATION_PRINT_FORMS_AGENT_SHORT_FIO: 'Жигарев И.А.'
+  INTEGRATION_PRINT_FORMS_AGENT_FIO_GENETIVE: 'Жигарева Ивана Александровича'
+  INTEGRATION_PRINT_FORMS_AGENT_BASIS: 'доверенности № 350000/1440-ДН'
+  INTEGRATION_PRINT_FORMS_AGENT_BASIS_DATE: '13.07.2020'
+  # FL Rate limiter
+  RATE_LIMITER_FL_REQUESTS: '5'
+  RATE_LIMITER_FL_PERIOD: '1s'
+  RATE_LIMITER_FL_TIMEOUT: '10s'
+  RATE_LIMITER_FL_BUFFER_SIZE: '50'
+  # Integration settings
+  INTEGRETION_PORTFOLIO_INITIATOR_SERVICE: 'smpl'
+  INTEGRATION_SETTINGS_SYSTEM_FROM: 'CustomerHub'
+  INTEGRATION_SETTINGS_SYSTEM_TO: 'CustomerHub'
+  INTEGRATION_SETTINGS_EXTERNAL_SYSTEM_ID: 'MDM_CH'
+  INTEGRATION_SETTINGS_PASSPORT_TYPE_CODE: '21'
+  INTEGRATION_SETTINGS_PHONE_TYPES: '7,6'
+  INTEGRATION_SETTINGS_EMAIL_TYPES: '13,11'
+  INTEGRATION_SETTINGS_PERMANENT_REGISTRATION_ADDRESS_TYPE: '1'
+  INTEGRATION_SETTINGS_ACTUAL_ADDRESS_TYPE: '3'
+  # Mdm-fl
+  INTEGRATION_MDM_FL_BACKEND_URL: 'https://k3-auth-app401lv.example24.ru/api/rb/frsvsc/cspc/v1'
+  INTEGRATION_CROSS_MDM_FL_BACKEND_URL: 'https://k3-auth-app401lv.example24.ru/api/rb/frsvsc/cscr/v1'
+  INTEGRATION_MDM_FL_CONNECTION_TIMEOUT: '10s'
+  INTEGRATION_MDM_FL_READ_TIMEOUT: '10s'
+  # Credit number settings
+  CREDIT_NUMBER_DELIMITER: ','
+  # Processing attempts and timeouts
+  STS_RECOGNITION_ATTEMPTS: '5'
+  STS_RECOGNITION_TIMEOUT: '6h'
+  DOCUMENT_UPLOAD_ATTEMPTS: '5'
+  DOCUMENT_REFRESH_LIMIT: '7'
+  RATE_APPLYING_TIMEOUT: '1h'
+  # Notification-settings
+  TG_INTEGRATION_SOURCE: 'smpl-prolongation'
+  TG_INTEGRATION_SENDER: 'example'
+  TG_INTEGRATION_SYSTEM_ID: 'cm.SystemInstance.CustomerHub'
+  TG_INTEGRATION_EVENT: 'smpl-pledge-push'
+  TG_INTEGRATION_BACKEND_URL: 'https://unp-tg.ss1-genr01-unpc-k3-unp.apps.ss1-genr01.test.example.ru'
+  # Auto scoring settings
+  AUTOTEKA_SCORING_MAX_DAMAGE_COUNTER: '2'
+  AUTOTEKA_SCORING_DAMAGE_TYPES: 'red'
+  # Metrics
+  METRICS_EXPORTER_CRON: '0 */1 * * * *'
