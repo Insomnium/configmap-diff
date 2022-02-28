@@ -3,6 +3,15 @@ apiVersion: v1
 metadata:
   name: smpl-serv-pledge
 data:
+  # Print forms
+  INTEGRATION_PRINT_FORMS_PD_FORMAT: '0'
+  INTEGRATION_PRINT_FORMS_TEMPLATE_NAME: 'DS_KD_Auto'
+  INTEGRATION_PRINT_FORMS_ADDITIONAL_AGGREEMENT: '1'
+  INTEGRATION_PRINT_FORMS_AGENT_FIO: 'Жигарев Иван Александрович'
+  INTEGRATION_PRINT_FORMS_AGENT_SHORT_FIO: 'Жигарев И.А.'
+  INTEGRATION_PRINT_FORMS_AGENT_FIO_GENETIVE: 'Жигарева Ивана Александровича'
+  INTEGRATION_PRINT_FORMS_AGENT_BASIS: 'доверенности № 350000/1440-ДН'
+  INTEGRATION_PRINT_FORMS_AGENT_BASIS_DATE: '13.07.2020'
   JAVA_TOOL_OPTIONS: '-Dfile.encoding=UTF-8 -Duser.timezone=Europe/Moscow'
   LOGGING_LEVEL_RU_example_MSA_CARLOAN_SERVICE_COMMON_OAUTH2_CLIENT: 'INFO'
   SPRING_PROFILES_ACTIVE: 'openshift'
@@ -13,16 +22,6 @@ data:
   FLUENTD_HOST: 'smpl-logs-collector.rs1-genr01-smpl-rr01.svc.cluster.local'
   FLUENTD_PORT: '24224'
   APP_LOGGING_LEVEL: 'DEBUG'
-  # Audit
-  AUDIT_INFO_SYSTEM_CODE: 'smpl'
-  AUDIT_REGISTRATION_TOPIC: 'initial-audit'
-  AUDIT_EVENTS_TOPIC: 'audit'
-  AUDIT_BOOTSTRAP_SERVERS: 'rrtsau-kf5001lv.test.example.ru:9092,rrtsau-kf5002lv.test.example.ru:9092'
-  AUDIT_SECURITY_PROTOCOL: 'SSL'
-  AUDIT_KAFKA_SSL_KEYSTORE_PATH: 'file:///mnt/audit-kafka-certs/keystore.jks'
-  AUDIT_KAFKA_SSL_KEYSTORE_TYPE: 'JKS'
-  AUDIT_KAFKA_SSL_TRUSTSTORE_PATH: 'file:///mnt/audit-kafka-certs/truststore.jks'
-  AUDIT_KAFKA_SSL_TRUSTSTORE_TYPE: 'JKS'
   # EPA
   EPA_AUTHORIZATION_GRANT_TYPE: 'client_credentials'
   EPA_TOKEN_URL: 'https://k4-auth-mgt401lv.example24.ru/passport/oauth2/token'
@@ -169,15 +168,6 @@ data:
   ###############################################
   # Legacy
   ###############################################
-  # Print forms
-  INTEGRATION_PRINT_FORMS_PD_FORMAT: '0'
-  INTEGRATION_PRINT_FORMS_TEMPLATE_NAME: 'DS_KD_Auto'
-  INTEGRATION_PRINT_FORMS_ADDITIONAL_AGGREEMENT: '1'
-  INTEGRATION_PRINT_FORMS_AGENT_FIO: 'Жигарев Иван Александрович'
-  INTEGRATION_PRINT_FORMS_AGENT_SHORT_FIO: 'Жигарев И.А.'
-  INTEGRATION_PRINT_FORMS_AGENT_FIO_GENETIVE: 'Жигарева Ивана Александровича'
-  INTEGRATION_PRINT_FORMS_AGENT_BASIS: 'доверенности № 350000/1440-ДН'
-  INTEGRATION_PRINT_FORMS_AGENT_BASIS_DATE: '13.07.2020'
   # FL Rate limiter
   RATE_LIMITER_FL_REQUESTS: '5'
   RATE_LIMITER_FL_PERIOD: '1s'
